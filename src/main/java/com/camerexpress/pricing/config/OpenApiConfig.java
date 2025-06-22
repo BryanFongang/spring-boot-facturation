@@ -18,15 +18,15 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .servers(List.of(
                         new Server().url("http://localhost:8080").description("Serveur de développement"),
-                        new Server().url("https://api.camerexpress.com").description("Serveur de production")
+                        new Server().url("https://api.Pick&Drop.com").description("Serveur de production")
                 ))
                 .info(new Info()
-                        .title("CamerExpress Pricing API")
-                        .description("API de calcul de tarification pour le système CamerExpress basée sur le modèle mathématique complet")
+                        .title("Pick&Drop Pricing API")
+                        .description("API de calcul de tarification pour le système Pick&Drop basée sur le modèle mathématique complet")
                         .version("2.1.0")
                         .contact(new Contact()
-                                .name("Équipe Backend CamerExpress")
-                                .email("backend@camerexpress.com"))
+                                .name("Équipe Backend Pick&Drop")
+                                .email("bryanofongang.gmail.com"))
                         .license(new License()
                                 .name("MIT License")
                                 .url("https://opensource.org/licenses/MIT")));
