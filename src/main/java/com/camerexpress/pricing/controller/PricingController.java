@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/pricing")
-@Tag(name = "Pricing API", description = "API de calcul de tarification CamerExpress")
+@Tag(name = "Pricing API", description = "API de calcul de tarification Pick&Drop")
 @CrossOrigin(origins = "*")
 public class PricingController {
 
@@ -42,6 +42,6 @@ public class PricingController {
     @GetMapping("/health")
     @Operation(summary = "Vérifier l'état de l'API", description = "Endpoint de santé de l'API")
     public ResponseEntity<String> health() {
-        return ResponseEntity.ok("CamerExpress Pricing API v2.1.0 - Status: OK");
+        return ResponseEntity.ok("Pick&Drop Pricing API v2.1.0 - Status: OK");
     }
 }
