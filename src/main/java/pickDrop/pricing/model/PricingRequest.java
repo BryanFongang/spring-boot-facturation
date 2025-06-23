@@ -1,4 +1,4 @@
-package com.camerexpress.pricing.model;
+package pickDrop.pricing.model;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

@@ -1,7 +1,7 @@
-package com.camerexpress.pricing.service;
+package pickDrop.pricing.service;
 
-import com.camerexpress.pricing.model.PricingRequest;
-import com.camerexpress.pricing.model.PricingResponse;
+import pickDrop.pricing.model.PricingRequest;
+import pickDrop.pricing.model.PricingResponse;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
@@ -36,7 +36,7 @@ public class PricingCalculationService {
         double geographicCost = calculateGeographicCost(request.getRoute());
 
         // 3. Calcul du multiplicateur temporel (Section 5)
-        double temporalMultiplier = calculateTemporalMultiplier(request.getService());
+        double temporalMultiplier = calculateTemporalMultiplier(request.getService(),basePrice);
 
         // 4. Calcul du coût point relais (Section 6)
         double relayPointCost = calculateRelayPointCost(request.getService());
@@ -140,7 +140,7 @@ public class PricingCalculationService {
         return 4 * distance;
     }
 
-    private double calculateTemporalMultiplier(PricingRequest.ServiceInfo service) {
+    private double calculateTemporalMultiplier(PricingRequest.ServiceInfo service, double basePrice) {
         // Multiplicateur de vitesse (équation 25)
         double speedMultiplier = getSpeedMultiplier(service.getSpeed());
 
@@ -150,7 +150,7 @@ public class PricingCalculationService {
         // Facteur de programmation (équation 28)
         double scheduleMultiplier = service.isScheduled() ? 1.2 : 1.0;
 
-        return speedMultiplier * (1 + timeSuplement / BASE_COST) * scheduleMultiplier;
+        return speedMultiplier * (1 + timeSuplement / basePrice) * scheduleMultiplier;
     }
 
     private double getSpeedMultiplier(String speed) {

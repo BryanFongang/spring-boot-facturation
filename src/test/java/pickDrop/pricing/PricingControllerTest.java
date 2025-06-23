@@ -1,9 +1,9 @@
-package com.camerexpress.pricing;
+package pickDrop.pricing;
 
-import com.camerexpress.pricing.controller.PricingController;
-import com.camerexpress.pricing.model.PricingRequest;
-import com.camerexpress.pricing.model.PricingResponse;
-import com.camerexpress.pricing.service.PricingCalculationService;
+import pickDrop.pricing.controller.PricingController;
+import pickDrop.pricing.model.PricingRequest;
+import pickDrop.pricing.model.PricingResponse;
+import pickDrop.pricing.service.PricingCalculationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

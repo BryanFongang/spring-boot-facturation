@@ -1,8 +1,8 @@
-package com.camerexpress.pricing.controller;
+package pickDrop.pricing.controller;
 
-import com.camerexpress.pricing.model.PricingRequest;
-import com.camerexpress.pricing.model.PricingResponse;
-import com.camerexpress.pricing.service.PricingCalculationService;
+import pickDrop.pricing.model.PricingRequest;
+import pickDrop.pricing.model.PricingResponse;
+import pickDrop.pricing.service.PricingCalculationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

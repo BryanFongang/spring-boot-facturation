@@ -1,4 +1,4 @@
-package com.camerexpress.pricing.config;
+package pickDrop.pricing.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
