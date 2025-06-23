@@ -13,20 +13,17 @@ import java.util.List;
 
 @Configuration
 public class OpenApiConfig {
-
-    // Injecte la valeur de l'URL du serveur depuis application.properties ou l'environnement
-    @Value("${pickdrop.api.server.url:http://localhost:8080}")
+    @Value("${PICKDROP_API_SERVER_URL:http://localhost:8080}")
     private String serverUrl;
 
     @Bean
     public OpenAPI customOpenAPI() {
-        // Le serveur est maintenant dynamique. En production, il prendra l'URL de Render.
-        Server productionServer = new Server();
-        productionServer.setUrl(serverUrl);
-        productionServer.setDescription("Serveur Principal");
+        Server mainServer = new Server();
+        mainServer.setUrl(serverUrl);
+        mainServer.setDescription("Serveur Principal");
 
         return new OpenAPI()
-                .servers(List.of(productionServer)) // On ne garde que le serveur pertinent
+                .servers(List.of(mainServer))
                 .info(new Info()
                         .title("Pick&Drop Pricing API")
                         .description("API de calcul de tarification pour le système Pick&Drop.")
