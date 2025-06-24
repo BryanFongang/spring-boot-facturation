@@ -18,6 +18,7 @@ public class PricingCalculationService {
     private static final double FUEL_FACTOR = 0.15; // facteur carburant
     private static final double MINIMUM_COST = 300.0; // Contrainte minimum
     private static final double MAXIMUM_COST = 50000.0; // Contrainte maximum
+    private static final double PERISHABLE_SURCHARGE = 500.0; // Surcoût de 500 FCFA pour les colis périssables
 
     // Matrice des zones tarifaires (equation 17)
     private static final double[][] ZONE_MATRIX = {
@@ -39,7 +40,10 @@ public class PricingCalculationService {
         double temporalMultiplier = calculateTemporalMultiplier(request.getService(),basePrice);
 
         // 4. Calcul du coût point relais (Section 6)
-        double relayPointCost = calculateRelayPointCost(request.getService());
+        double relayPointCost = calculateRelayPointCost(
+                request.getService(),
+                request.getPackageInfo()
+        );
 
         // 5. Calcul du coût d'assurance (Section 7)
         double insuranceCost = calculateInsuranceCost(
@@ -180,19 +184,29 @@ public class PricingCalculationService {
         return 0;
     }
 
-    private double calculateRelayPointCost(PricingRequest.ServiceInfo service) {
+    private double calculateRelayPointCost(PricingRequest.ServiceInfo service, PricingRequest.PackageInfo packageInfo) {
         String relayType = service.getRelayType();
-        if (relayType == null) return 0;
+        if (relayType == null) {
+            return 0;
+        }
 
-        // Coûts selon le tableau (30)
-        return switch (relayType.toUpperCase()) {
-            case "PREMIUM" -> 200 + 150; // Cdepot + Cretrait
+        // Coût de base du point relais (dépôt + retrait)
+        double baseRelayCost = switch (relayType.toUpperCase()) {
+            case "PREMIUM" -> 200 + 150;
             case "STANDARD" -> 100 + 100;
             case "BASIC" -> 50 + 50;
             default -> 0;
         };
-    }
 
+        // Ajout du surcoût si le colis est périssable
+        double perishableCost = 0;
+        if (packageInfo.isPerishable()) {
+            perishableCost = PERISHABLE_SURCHARGE;
+        }
+
+        // On suppose pas de frais de stockage pour un nouvel envoi (f_stockage = 0)
+        return baseRelayCost + perishableCost;
+    }
     private double calculateInsuranceCost(double declaredValue, String insuranceLevel) {
         if (insuranceLevel == null || declaredValue <= 0) return 0;
 

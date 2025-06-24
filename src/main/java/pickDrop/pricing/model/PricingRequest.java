@@ -66,6 +66,14 @@ public class PricingRequest {
 
         public double getDeclaredValue() { return declaredValue; }
         public void setDeclaredValue(double declaredValue) { this.declaredValue = declaredValue; }
+
+
+        @Schema(description = "Indique si le contenu du colis est périssable", example = "false")
+        private boolean isPerishable;
+
+        // --- Getters et Setters pour le nouveau champ ---
+        public boolean isPerishable() { return isPerishable; }
+        public void setPerishable(boolean perishable) { isPerishable = perishable; }
     }
 
     @Schema(description = "Dimensions du colis")
@@ -90,6 +98,7 @@ public class PricingRequest {
 
         public double getHeight() { return height; }
         public void setHeight(double height) { this.height = height; }
+
     }
 
     @Schema(description = "Informations de route")
@@ -107,6 +116,8 @@ public class PricingRequest {
 
         public Location getDestination() { return destination; }
         public void setDestination(Location destination) { this.destination = destination; }
+
+
     }
 
     @Schema(description = "Localisation")
